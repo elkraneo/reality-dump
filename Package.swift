@@ -4,20 +4,40 @@
 import PackageDescription
 
 let package = Package(
-    name: "RealityDump",
-    products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "RealityDump",
-            targets: ["RealityDump"]),
-    ],
-    targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "RealityDump"),
-        .testTarget(
-            name: "RealityDumpTests",
-            dependencies: ["RealityDump"]),
-    ]
+  name: "reality-dump",
+  platforms: [
+    .iOS(.v15),
+    .macOS(.v12),
+    .visionOS(.v1),
+  ],
+  products: [
+    .library(
+      name: "RealityDump",
+      targets: ["RealityDump"]
+    )
+  ],
+  dependencies: [
+    .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: .init(1, 0, 0)),
+    .package(url: "https://github.com/apple/swift-docc-symbolkit.git", branch: "main"),
+  ],
+  targets: [
+    .target(
+      name: "RealityDump",
+      dependencies: [
+        .product(name: "CustomDump", package: "swift-custom-dump")
+      ]
+    ),
+    .testTarget(
+      name: "RealityDumpTests",
+      dependencies: [
+        "RealityDump",
+        .product(name: "SymbolKit", package: "swift-docc-symbolkit"),
+      ],
+      resources: [
+        .copy("Resources/xrOS/"),
+        .copy("Resources/iOS/"),
+        .copy("Resources/macOS/")
+      ]
+    ),
+  ]
 )
