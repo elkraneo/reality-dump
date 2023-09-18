@@ -24,7 +24,7 @@ final class RealityDumpTests: XCTestCase {
     let symbolGraph = try JSONDecoder().decode(SymbolGraph.self, from: data)
     let titles = extractComponentsTitles(from: symbolGraph)
 
-    XCTAssertEqual(titles.count, 25)
+    XCTAssertEqual(titles.count, 19)
     XCTAssertEqual(titles, expectedComponents_iOS)
   }
 
@@ -48,7 +48,7 @@ final class RealityDumpTests: XCTestCase {
     let symbolGraph = try JSONDecoder().decode(SymbolGraph.self, from: data)
     let titles = extractComponentsTitles(from: symbolGraph)
 
-    XCTAssertEqual(titles.count, 21)
+    XCTAssertEqual(titles.count, 17)
     XCTAssertEqual(titles, expectedComponents_macOS)
   }
 
@@ -72,7 +72,7 @@ final class RealityDumpTests: XCTestCase {
     let symbolGraph = try JSONDecoder().decode(SymbolGraph.self, from: data)
     let titles = extractComponentsTitles(from: symbolGraph)
 
-    XCTAssertEqual(titles.count, 45)
+    XCTAssertEqual(titles.count, 31)
     XCTAssertEqual(titles, expectedComponents_xrOS)
   }
 
@@ -84,9 +84,9 @@ final class RealityDumpTests: XCTestCase {
 
     let common = iOS.intersection(macOS)
 
-    XCTAssertEqual(iOS.count, 25)
-    XCTAssertEqual(macOS.count, 21)
-    XCTAssertEqual(common.count, 21)
+    XCTAssertEqual(iOS.count, 19)
+    XCTAssertEqual(macOS.count, 17)
+    XCTAssertEqual(common.count, 17)
     XCTAssertEqual(common.sorted(), macOS.sorted())  // > Claim: macOS is a subset of iOS
 
     let substracted = iOS.subtracting(macOS)
@@ -101,9 +101,9 @@ final class RealityDumpTests: XCTestCase {
     let xrOS = Set(expectedComponents_xrOS)
 
     let common = macOS.intersection(xrOS)
-    XCTAssertEqual(macOS.count, 21)
-    XCTAssertEqual(xrOS.count, 45)
-    XCTAssertEqual(common.count, 16)
+    XCTAssertEqual(macOS.count, 17)
+    XCTAssertEqual(xrOS.count, 31)
+    XCTAssertEqual(common.count, 12)
     XCTAssertNotEqual(common.sorted(), macOS.sorted())  // > Claim: macOS is NOT a subset of xrOS
 
     let substracted = macOS.subtracting(xrOS)
@@ -119,9 +119,9 @@ final class RealityDumpTests: XCTestCase {
 
     let common = iOS.intersection(xrOS)
 
-    XCTAssertEqual(iOS.count, 25)
-    XCTAssertEqual(xrOS.count, 45)
-    XCTAssertEqual(common.count, 19)
+    XCTAssertEqual(iOS.count, 19)
+    XCTAssertEqual(xrOS.count, 31)
+    XCTAssertEqual(common.count, 13)
     XCTAssertNotEqual(common.sorted(), iOS.sorted())  // > Claim: iOS is NOT a subset of xrOS
 
     let substracted = iOS.subtracting(xrOS)
@@ -164,7 +164,7 @@ final class RealityDumpTests: XCTestCase {
     let xrOS = Set(titles_xrOS)
 
     let common = iOS.intersection(macOS).intersection(xrOS)
-    XCTAssertEqual(common.count, 16)
+    XCTAssertEqual(common.count, 12)
   }
 
   func test_components_iOS_exclusive() throws {
@@ -198,6 +198,8 @@ final class RealityDumpTests: XCTestCase {
     let iOS = Set(titles_iOS)
     let macOS = Set(titles_macOS)
     let xrOS = Set(titles_xrOS)
+
+    dump(titles_iOS)
 
     let unique = iOS.subtracting(macOS).subtracting(xrOS)
     XCTAssertEqual(unique.count, 1)
@@ -275,7 +277,7 @@ final class RealityDumpTests: XCTestCase {
 
     let unique = xrOS.subtracting(iOS).subtracting(macOS)
 
-    XCTAssertEqual(unique.count, 26)
+    XCTAssertEqual(unique.count, 18)
     XCTAssertEqual(Array(unique.sorted()), exclusiveComponents_xrOS)
   }
 
@@ -313,7 +315,7 @@ final class RealityDumpTests: XCTestCase {
 
     let all = iOS.union(macOS).union(xrOS)
 
-    XCTAssertEqual(all.count, 51)
+    XCTAssertEqual(all.count, 37)
     XCTAssertEqual(Array(all.sorted()), allComponents)
   }
 }
@@ -330,23 +332,16 @@ private func extractComponentsTitles(from symbolGraph: SymbolGraph) -> [String] 
     .filter({ $0.target == componentIdentifier })
     .map(\.source)
 
-  let mainLevelComponents = conformingIdentifiers.compactMap { identifier in
-    symbolGraph.symbols.values
-      .filter({ $0.kind.identifier == .struct })
-      .first(where: { $0.identifier.precise == identifier })?
-      .names.title
-  }
-
-  let allComponents =
-    mainLevelComponents.flatMap { title in
+  let components =
+    conformingIdentifiers.compactMap { identifier in
       symbolGraph.symbols.values
         .filter({ $0.kind.identifier == .struct })
-        .filter({ $0.pathComponents.contains(title) })
-        .map(\.names.title)
+        .first(where: { $0.identifier.precise == identifier })?
+        .names.title
     }
     .sorted()
 
-  return allComponents
+  return components
 
   //TODO: try to use mixins
   // let symbol = try XCTUnwrap(symbolGraph.symbols.values.first)
