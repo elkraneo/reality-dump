@@ -13,7 +13,8 @@ import RealityKit
 
   // MARK: - iOS
 
-  extension AccessibilityComponent: CustomDumpReflectable {
+@available(iOS 17.0, *)
+extension AccessibilityComponent: CustomDumpReflectable {
     public var customDumpMirror: Mirror {
       .init(
         self,
@@ -226,7 +227,8 @@ import RealityKit
 
   // MARK: - macOS
 
-  extension AccessibilityComponent: CustomDumpReflectable {
+@available(macOS 14.0, *)
+extension AccessibilityComponent: CustomDumpReflectable {
     public var customDumpMirror: Mirror {
       .init(
         self,

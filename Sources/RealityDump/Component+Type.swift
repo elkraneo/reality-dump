@@ -13,7 +13,9 @@ import RealityKit
   // MARK: - iOS
 
   let componentTypes: [Component.Type] = [
-    AccessibilityComponent.self,
+    if #available(iOS 17.0, *) {
+      AccessibilityComponent.self
+    },
     AnchoringComponent.self,
     BodyTrackingComponent.self,
     CharacterControllerComponent.self,
@@ -33,12 +35,15 @@ import RealityKit
     SynchronizationComponent.self,
     Transform.self,
   ]
+
 #elseif os(macOS)
 
   // MARK: - macOS
 
   let componentTypes: [Component.Type] = [
-    AccessibilityComponent.self,
+    if #available(macOS 14.0, *) {
+      AccessibilityComponent.self
+    },
     AnchoringComponent.self,
     CharacterControllerComponent.self,
     CharacterControllerStateComponent.self,

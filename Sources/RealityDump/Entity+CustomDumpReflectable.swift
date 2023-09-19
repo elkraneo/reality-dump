@@ -1,4 +1,4 @@
-import CustomDump
+@_exported import CustomDump
 import RealityKit
 
 extension RealityKit.Entity: CustomDumpReflectable {

@@ -87,6 +87,7 @@ let componentTypes: [Component.Type] = [
   ${component}.self,
 % end
 ]
+
 #elseif os(macOS)
 
 // MARK: - macOS
