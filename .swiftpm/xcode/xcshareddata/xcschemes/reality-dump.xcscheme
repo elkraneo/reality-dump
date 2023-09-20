@@ -52,6 +52,38 @@
                BlueprintName = "RealityDumpTests"
                ReferencedContainer = "container:">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "RealityDumpTests/test_components_all()">
+               </Test>
+               <Test
+                  Identifier = "RealityDumpTests/test_components_common()">
+               </Test>
+               <Test
+                  Identifier = "RealityDumpTests/test_components_iOS_exclusive()">
+               </Test>
+               <Test
+                  Identifier = "RealityDumpTests/test_components_iOS_intersection_macOS()">
+               </Test>
+               <Test
+                  Identifier = "RealityDumpTests/test_components_iOS_intersection_xrOS()">
+               </Test>
+               <Test
+                  Identifier = "RealityDumpTests/test_components_iOS_symbolGraph()">
+               </Test>
+               <Test
+                  Identifier = "RealityDumpTests/test_components_macOS_exclusive()">
+               </Test>
+               <Test
+                  Identifier = "RealityDumpTests/test_components_macOS_intersection_xrOS()">
+               </Test>
+               <Test
+                  Identifier = "RealityDumpTests/test_components_macOS_symbolGraph()">
+               </Test>
+               <Test
+                  Identifier = "RealityDumpTests/test_components_xrOS_exclusive()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
