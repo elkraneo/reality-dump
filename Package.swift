@@ -17,26 +17,21 @@ let package = Package(
     )
   ],
   dependencies: [
-    .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: .init(1, 0, 0)),
-    .package(url: "https://github.com/apple/swift-docc-symbolkit.git", branch: "main"),
+    .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "1.0.0"),
+    .package(url: "https://github.com/elkraneo/reality-symbols", branch: "main"),
   ],
   targets: [
     .target(
       name: "RealityDump",
       dependencies: [
-        .product(name: "CustomDump", package: "swift-custom-dump")
+        .product(name: "CustomDump", package: "swift-custom-dump"),
+        .product(name: "RealitySymbols", package: "reality-symbols"),
       ]
     ),
     .testTarget(
       name: "RealityDumpTests",
       dependencies: [
-        "RealityDump",
-        .product(name: "SymbolKit", package: "swift-docc-symbolkit"),
-      ],
-      resources: [
-        .copy("Resources/xrOS/"),
-        .copy("Resources/iOS/"),
-        .copy("Resources/macOS/")
+        "RealityDump"
       ]
     ),
   ]

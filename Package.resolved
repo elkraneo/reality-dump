@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "reality-symbols",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elkraneo/reality-symbols",
+      "state" : {
+        "branch" : "main",
+        "revision" : "2eef91ec48ff0eca087147f6e32136a7d6e54100"
+      }
+    },
+    {
       "identity" : "swift-custom-dump",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-custom-dump",

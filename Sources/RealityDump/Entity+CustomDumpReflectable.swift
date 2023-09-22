@@ -1,6 +1,7 @@
 @_exported import CustomDump
 import RealityKit
 
+//TODO: implement subclasses of Entity
 extension RealityKit.Entity: CustomDumpReflectable {
   public var customDumpMirror: Mirror {
     .init(
