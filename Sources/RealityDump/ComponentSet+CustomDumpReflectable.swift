@@ -7,11 +7,13 @@ extension Entity.ComponentSet: CustomDumpReflectable {
     var componentsInEntity: [any Component] {
       var components: [any Component] = []
 
-      for componentType in ComponentType.allCases.map(\.type) {
-        if self.has(componentType) {
-          components.append(self[componentType]!)
-        }
-      }
+      //FIXME:
+      fatalError()
+      // for componentType in ComponentType.allCases.map(\.type) {
+      //   if self.has(componentType) {
+      //     components.append(self[componentType]!)
+      //   }
+      // }
 
       return components
     }

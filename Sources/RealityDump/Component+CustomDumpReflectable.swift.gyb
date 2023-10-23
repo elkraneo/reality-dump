@@ -93,8 +93,8 @@ extension ${component}: CustomDumpReflectable {
     )
   }
 }
-
 % end
+
 #elseif os(macOS)
 
 // MARK: - macOS
@@ -110,8 +110,8 @@ extension ${component}: CustomDumpReflectable {
     )
   }
 }
-
 % end
+
 #elseif os(visionOS)
 
 // MARK: - visionOS
@@ -127,6 +127,6 @@ extension ${component}: CustomDumpReflectable {
     )
   }
 }
-
 % end
+
 #endif

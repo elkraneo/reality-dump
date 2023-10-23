@@ -23,7 +23,7 @@ extension RealityKit.Entity: CustomDumpReflectable {
         "children": self.children.map({ $0 }),
 
         ///Components
-        "components": self.components,
+        //FIXME: "components": self.components,
 
         /// Synchronization
         //TODO: "synchronization": self.synchronization,
