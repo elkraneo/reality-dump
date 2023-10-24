@@ -105,6 +105,7 @@ extension Transform: CustomDumpReflectable {
 
 // MARK: - macOS
 
+@available(macOS 14.0, *)
 extension AccessibilityComponent: CustomDumpReflectable {
   public var customDumpMirror: Mirror {
     .init(reflecting: self)
