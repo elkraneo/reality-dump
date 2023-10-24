@@ -85,12 +85,7 @@ import RealityKit
 % for component in expectedComponents_iOS:
 extension ${component}: CustomDumpReflectable {
   public var customDumpMirror: Mirror {
-    .init(
-      self,
-      children: [
-        //TODO: display children
-      ]
-    )
+    .init(reflecting: self)
   }
 }
 % end
@@ -102,12 +97,7 @@ extension ${component}: CustomDumpReflectable {
 % for component in expectedComponents_macOS:
 extension ${component}: CustomDumpReflectable {
   public var customDumpMirror: Mirror {
-    .init(
-      self,
-      children: [
-        //TODO: display children
-      ]
-    )
+    .init(reflecting: self)
   }
 }
 % end
@@ -119,12 +109,7 @@ extension ${component}: CustomDumpReflectable {
 % for component in expectedComponents_xrOS:
 extension ${component}: CustomDumpReflectable {
   public var customDumpMirror: Mirror {
-    .init(
-      self,
-      children: [
-        //TODO: display children
-      ]
-    )
+    .init(reflecting: self)
   }
 }
 % end
